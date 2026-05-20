@@ -244,7 +244,7 @@ Due to the diverging nature of the notebook, we do not suggest using the 'Run Al
 |-|---------------|-------------|
 | 0 | Tutorial | pulls salinity (or salt) data from the DYAMOND website; demonstrates how to change the quality (or precision) of the data and the data type; demos how to save pictures and create visualizations | 
 | 1 | Section 1a & 1b | prints the available variables (salt) and amount of data (10,365 hours); these can change if the user changes the data type or precision in the Tutorial | 
-| 2 | Section 2: Focus on the North Atlantic | remaps the data to focus on the North Atlantic | 
+| 2 | Section 2: Focus on the North Atlantic | remaps the data to focus on the North Atlantic; prints recentered Atlantic visualization (compare to ./images/global-data.png) and zoomed in Atlantic visualization (compare to ./images/atl-data.png) | 
 
 #### CHOOSE: CSV or New Data
 | Order | Section Name | Description |
@@ -256,7 +256,7 @@ Due to the diverging nature of the notebook, we do not suggest using the 'Run Al
 | Order | Section Name | Description |
 |-|---------------|-------------|
 | 4 | Section 4: Label Target Data | labels the hurricane dates from the Hurricane Center chart and creates the binary target variable | 
-| 5 | Section 5: Train Model | splits the training data manually; imports and trains the XGBoosted model; prints results | 
+| 5 | Section 5: Train Model | splits the training data manually; imports and trains the XGBoosted model; prints confusion matrix (compare to ./images/cm.png) and feature importance graphs (compare to ./images/feature-importance.png)** | 
 
 ## Contact Information
 
