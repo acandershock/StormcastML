@@ -15,13 +15,13 @@
                              
 | | File | Description |
 |-|------|-------------|
+| 🗂️ | images | graphics used in README |
 | 📘 | project-code/hurricane.ipynb | contains the code for the project; execute to see results |
 | 📘 | task2_weather_events/ieee_scivis_dyamond_ocean.ipynb | tutorial notebook to practice set-up |
 | 🔶 | .gitignore | prevents unnecessary file pushes |
 | 📊 | atlantic_salt_full.csv | previously read-in table with salinity data; enables fast runtime |
 | 💲 | build_jetstream_environment.sh | used to create new JetStream enviornmnent |
 | ❗️ | environment.yml | conda environment `nsdf-scivis` (package manager) |
-| 🗂️ | images | graphics used in README|
 | 🔺 | jetstream2_manual.pdf | instructions to create a JetStream2 instance |
 | 🔑 | LICENSE | code license
 | ℹ️ | README.md | you are here! instructions and information about the project
@@ -220,6 +220,25 @@ The sections in the notebook have been categorized into RUN and CHOOSE, meaning:
 - ALL: everyone must run these sections. Your notebook will not compile if you neglect them.
 - CHOOSE: you must decide which section to run; you pick one or the other, but not both.
 
+#### How To Run Each Section
+Due to the diverging nature of the notebook, we do not suggest using the 'Run All' button *unless* you have commented out or deleted section 3a OR 3b. Instead, follow these instructions to run each section accordingly. </br>
+1. Make sure you are in the directory with the `hurricane.ipynb` notebook, in the  `project-code` repository.
+  ```
+  cd project-code
+  ```
+2. Run each cell individually by clicking the "Run This Cell and Advance Button" for each cell. Alternatively, you can comment out the respecitive section (in section 3), and then use the "Run All" button. Each button is shown in the figure below.
+
+<table>
+  <tr>
+    <th>Running Buttons</th>
+  </tr>
+  <tr>
+    <td><img src="./images/running-graphic.png" width="800" height="400" /></td>
+  </tr>
+</table>
+
+3. That's it! A description of each section is shown below for your convenience.
+
 #### ALL: Initial Set-Up
 | Order | Section Name | Description |
 |-|---------------|-------------|
@@ -263,5 +282,5 @@ National Hurricane Center, “2020 atlantic hurricane season.”
 https://www.nhc.noaa.gov/data/tcr/index.php?basin=atlseason=2020,
 2020. Accessed: 2026-05-12. </br>
 <a id="5">[5]</a>
-[5] T. Chen and C. Guestrin, “Xgboost: A scalable tree boosting system,”
+T. Chen and C. Guestrin, “Xgboost: A scalable tree boosting system,”
 Proceedings of the ACM SIGKDD Intern
