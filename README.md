@@ -30,11 +30,11 @@
 This repository contains information for Alexa Andershock's final project for the the Spring 2026 COSC 426: Data Engineering class, taken in the Spring 2026 semester. This project leveraged the DYAMOND dataset and integrated machine learning techniques to predict the formation of hurricanes, cyclones, and tropic storms based on the 2020 North Atlantic hurricane data provided by the National Hurricane Center. Initial findings show that while the model successfully predicts 81% of hurricanes, only 53% of its total hurricane predictions are correct. A more detailed description of the project, as well as the contents of the repository, is detailed below.
 
 ### Motivation
-Predicting the presence of a hurricane before landfall is paramount to creating hazard information, advising individual decisions, and saving lives. Machine learning techniques have been proven to extract trends from large datasets; therefore, this project utilized an XGBoosted model, which is ideal for large datasets and a small to medium number of parameters. We hope that these ML techniques can uncover trends that will predict the formation of hurricanes, cyclones, and tycoons before they make landfall and help residents and emergency service providers make more informed decisions. 
+Predicting the presence of a hurricane before landfall is paramount to creating hazard information, advising individual decisions, and saving lives. Machine learning techniques have been proven to extract trends from large datasets [[1, 2]](#1); therefore, this project utilized an XGBoosted model, which is ideal for large datasets and a small to medium number of parameters. We hope that these ML techniques can uncover trends that will predict the formation of hurricanes, cyclones, and tycoons before they make landfall and help residents and emergency service providers make more informed decisions. 
 
 ### Description
 #### IEEE SciVis 2026 Contest
-This project focused on exploring and visualizing large-scale climate datasets from the IEEE SciVis 2026 Contest. The contest provides real scientific data used in climate and ocean modeling, providing the opportunity to analyze complex environmental phenomena and communicate insights through visualization. This project focused on Task 2 from the SciVis contest tasks, which is described in detail on the [contest website](!https://sciviscontest2026.github.io/tasks/home). The proposed goal of this task was to study atmosphere–ocean interactions during storms and extreme weather events using DYAMOND data, which was implemented through machine learning techniques and external data from the 2020 North Atlantic hurrcane season. A brief description of the methods can be found below.
+This project focused on exploring and visualizing large-scale climate datasets from the IEEE SciVis 2026 Contest. The contest provides real scientific data used in climate and ocean modeling, providing the opportunity to analyze complex environmental phenomena and communicate insights through visualization. This project focused on Task 2 from the SciVis contest tasks, which is described in detail on the [contest website](!https://sciviscontest2026.github.io/tasks/home). The proposed goal of this task was to study atmosphere–ocean interactions during storms and extreme weather events using the DYAMOND dataset [[3]](#3), which was implemented through machine learning techniques and external data from the 2020 North Atlantic hurrcane season [[4]](#4). A brief description of the methods can be found below.
 
 ### Methods
 #### Data Filtering
@@ -92,13 +92,12 @@ Four engineered features were added to the dataset in order to train the model o
 | Anomaly           | anomaly                | The difference between the mean salinity and the global mean.                            | 
 
 #### Machine Learning Integration
-An XGBoosted tree model was used in this project. The final model was trained with 200 trees, a max tree depth of 6, a learning rate of 0.01, a scale positive rate of the ratio of the number of negative over positive labels, and an evaluation metric of area under the curve (AUC).
+An XGBoosted [[5]](#5) tree model was used in this project. The final model was trained with 200 trees, a max tree depth of 6, a learning rate of 0.01, a scale positive rate of the ratio of the number of negative over positive labels, and an evaluation metric of area under the curve (AUC).
 
 ### Results
 The final results of the model are shown below. The model performed relatively well, given the large class imbalance as seen in the Support column.
 The total recall was about equal, meaning that the model was learning to discriminate between the classes effectively. It could accurately classify about 80% of both hurricane and non-hurricane events. The low precision in the Hurricane class, however, suggests that the model overly predicted the occurrence of a hurricane; as a result, it was only correct 53% of the time. </br>
 
-**Classification Report**
 | Class | Precision | Recall | F1-Score | Support | 
 |-------------|------|------|------|------|
 | No Hurricane | 0.94 | 0.82 | 0.88 | 3694|
@@ -222,23 +221,47 @@ The sections in the notebook have been categorized into RUN and CHOOSE, meaning:
 - CHOOSE: you must decide which section to run; you pick one or the other, but not both.
 
 #### ALL: Initial Set-Up
-1. Tutorial
-2. Section 1a and 1b
-3. Section 2: Focus on the North Atlantic
+| Order | Section Name | Description |
+|-|---------------|-------------|
+| 0 | Tutorial | pulls salinity (or salt) data from the DYAMOND website; demonstrates how to change the quality (or precision) of the data and the data type; demos how to save pictures and create visualizations | 
+| 1 | Section 1a & 1b | prints the available variables (salt) and amount of data (10,365 hours); these can change if the user changes the data type or precision in the Tutorial | 
+| 2 | Section 2: Focus on the North Atlantic | remaps the data to focus on the North Atlantic | 
 
 #### CHOOSE: CSV or New Data
-1. 3a: No CSV File
-2. 3b: CSV File
+| Order | Section Name | Description |
+|-|---------------|-------------|
+| 3 | Section 3a: No CSV File | The `.csv` file that is provided has read in data for the 'salt' variable at precision `z=-18`, as set in the tutorial. If you are ok with using this variable and precision, execute this section. If you need to change either of these variables, the data will have to re-read from the cloud (see below). |
+| 3 | Section 3b: CSV File | If you wish to make changes, the data must be re-downloaded from the cloud. Execute this section to do so. A time estimate is provided at the top of the cell (for `z=-18`, this was about an hour). |
 
 #### ALL: Final Results
-1. Section 4: Label Target Data
-2. Section 5: Train Model
-
-
-### Examples
+| Order | Section Name | Description |
+|-|---------------|-------------|
+| 4 | Section 4: Label Target Data | creates the four engineered labels and adds them to the dataframe | 
+| 5 | Section 5: Train Model | splits the training data manually; imports and trains the XGBoosted model; prints results | 
 
 ## Contact Information
 
+For any questions about the notebook, please contact Alexa "Lexy" Andershock at aandersh@vols.utk.edu or at (615) 801-2852.
+
 ## Acknowledgements
+Thank you to Dr. Michela Taufer, Steven Dao, and the other GTAs who provided assistance in Spring 2026 for the COSC 426 Data Engineering course at the University of Tennessee, Knoxville.
 
 ## References
+<a id="1">[1]</a>
+J. Ge et al., “A comparison of a large language model vs manual chart
+review for the extraction of data elements from the electronic health
+record,” Gastroenterology, vol. 166, pp. 707–709.e3, 2023. </br>
+<a id="2">[2]</a>
+B. Khosravi et al., “Demystifying statistics and machine learning in
+analysis of structured tabular data,” Journal of Arthroplasty, vol. 38,
+no. 10, 2023. </br>
+<a id="3">[3]</a>
+B. Stevens et al., “Dyamond: the dynamics of the atmospheric general
+circulation modeled on non-hydrostatic domains,” vol. 6, 2019. </br>
+<a id="4">[4]</a>
+National Hurricane Center, “2020 atlantic hurricane season.”
+https://www.nhc.noaa.gov/data/tcr/index.php?basin=atlseason=2020,
+2020. Accessed: 2026-05-12. </br>
+<a id="5">[5]</a>
+[5] T. Chen and C. Guestrin, “Xgboost: A scalable tree boosting system,”
+Proceedings of the ACM SIGKDD Intern
