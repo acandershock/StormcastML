@@ -256,7 +256,7 @@ Due to the diverging nature of the notebook, we do not suggest using the 'Run Al
 | Order | Section Name | Description |
 |-|---------------|-------------|
 | 4 | Section 4: Label Target Data | labels the hurricane dates from the Hurricane Center chart and creates the binary target variable | 
-| 5 | Section 5: Train Model | splits the training data manually; imports and trains the XGBoosted model; prints confusion matrix (compare to ./images/cm.png) and feature importance graphs (compare to ./images/feature-importance.png)** | 
+| 5 | Section 5: Train Model | splits the training data manually; imports and trains the XGBoosted model; prints confusion matrix (compare to ./images/cm.png) and feature importance graphs (compare to ./images/feature-importance.png) | 
 
 ## Contact Information
 
