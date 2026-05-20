@@ -249,13 +249,13 @@ Due to the diverging nature of the notebook, we do not suggest using the 'Run Al
 #### CHOOSE: CSV or New Data
 | Order | Section Name | Description |
 |-|---------------|-------------|
-| 3 | Section 3a: No CSV File | The `.csv` file that is provided has read in data for the 'salt' variable at precision `z=-18`, as set in the tutorial. If you are ok with using this variable and precision, execute this section. If you need to change either of these variables, the data will have to re-read from the cloud (see below). |
-| 3 | Section 3b: CSV File | If you wish to make changes, the data must be re-downloaded from the cloud. Execute this section to do so. A time estimate is provided at the top of the cell (for `z=-18`, this was about an hour). |
+| 3 | Section 3a: No CSV File | The `.csv` file that is provided has read in data for the 'salt' variable at precision `z=-18`, as set in the tutorial. If you are ok with using this variable and precision, execute this section. If you need to change either of these variables, the data will have to re-read from the cloud (see below). The four data engineered features are also pulled from the .csv file. |
+| 3 | Section 3b: CSV File | If you wish to make changes to either the variable type or precision, the data must be re-downloaded from the cloud. Execute this section to do so. A time estimate is provided at the top of the cell (for `z=-18`, this was about an hour). The four engineered features are then added to the dataframe after this. |
 
 #### ALL: Final Results
 | Order | Section Name | Description |
 |-|---------------|-------------|
-| 4 | Section 4: Label Target Data | creates the four engineered labels and adds them to the dataframe | 
+| 4 | Section 4: Label Target Data | labels the hurricane dates from the Hurricane Center chart and creates the binary target variable | 
 | 5 | Section 5: Train Model | splits the training data manually; imports and trains the XGBoosted model; prints results | 
 
 ## Contact Information
