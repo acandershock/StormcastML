@@ -1,94 +1,189 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/jfIvZbKc)
-# COSC 526-426 Project: Scientific Visualization with Climate Data
+# COSC 526-426 Final Project: Leveraging Machine Learning Techniques to Predict Extreme Weather Events Using DYAMOND Data
 
-This project focuses on exploring and visualizing large-scale climate datasets from the [IEEE SciVis 2026 Contest](https://sciviscontest2026.github.io/). The contest provides real scientific data used in climate and ocean modeling, giving you the opportunity to analyze complex environmental phenomena and communicate insights through visualization.
+## Navigating the Repository
 
-# Table of Contents
+### Table of Contents
+- [Project Overview](##Project-Overview):       motivation, methods, and results of the project
+- [Installation](##Installation):               instructions for how to install a JetStream instance; what libraries are required in the conda environment
+- [Set-Up](##Set-Up):                           how to run the notebook; expected output
+- [Contact Information](##Contact-Information): number and email address in case of issues
+- [Acknowledgements](##Acknowledgements):       people and institutions who helped make this work possible
+- [References](##References):                   academic citations
 
-- [SciVis Tasks Overview](#scivis-tasks-overview)
-- [Python Environment Installation on JetStream2](#python-environment-installation-on-jetstream2)
-- [Installing New Python Libraries into the Environment](#installing-new-python-libraries-into-the-environment)
+### File Directory
+                             
+| | File | Description |
+|-|------|-------------|
+| 📘 | project-code/hurricane.ipynb | contains the code for the project; execute to see results |
+| 📘 | task2_weather_events/ieee_scivis_dyamond_ocean.ipynb | tutorial notebook to practice set-up |
+| 🔶 | .gitignore | prevents unnecessary file pushes |
+| 📊 | atlantic_salt_full.csv | previously read-in table with salinity data; enables fast runtime |
+| 💲 | build_jetstream_environment.sh | used to create new JetStream enviornmnent |
+| ❗️ | environment.yml | conda environment `nsdf-scivis` (package manager) |
+| 🗂️ | images | graphics used in README|
+| 🔺 | jetstream2_manual.pdf | instructions to create a JetStream2 instance |
+| 🔑 | LICENSE | code license
+| ℹ️ | README.md | you are here! instructions and information about the project
 
-# SciVis Tasks Overview
+## Project-Overview
+This repository contains information for Alexa Andershock's final project for the the Spring 2026 COSC 426: Data Engineering class, taken in the Spring 2026 semester. This project leveraged the DYAMOND dataset and integrated machine learning techniques to predict the formation of hurricanes, cyclones, and tropic storms based on the 2020 North Atlantic hurricane data provided by the National Hurricane Center. Initial findings show that while the model successfully predicts 81% of hurricanes, only 53% of its total hurricane predictions are correct. A more detailed description of the project, as well as the contents of the repository, is detailed below.
 
-In this project, you will work with large climate datasets commonly used in scientific research. This repository includes initial Jupyter notebooks for reading SciVis datasets using the OpenVisus framework.
-There are four tasks available in the SciVis Contest. Your project will focus on **one scientific question from the SciVis contest tasks**. See the task descriptions [here](https://sciviscontest2026.github.io/tasks/home) to explore each option.
-The available tasks are as follows:
+### Motivation
+Predicting the presence of a hurricane before landfall is paramount to creating hazard information, advising individual decisions, and saving lives. Machine learning techniques have been proven to extract trends from large datasets; therefore, this project utilized an XGBoosted model, which is ideal for large datasets and a small to medium number of parameters. We hope that these ML techniques can uncover trends that will predict the formation of hurricanes, cyclones, and tycoons before they make landfall and help residents and emergency service providers make more informed decisions. 
 
-### `task2_weather_events`  
-Study atmosphere–ocean interactions during storms and extreme weather events using DYAMOND data.
+### Description
+#### IEEE SciVis 2026 Contest
+This project focused on exploring and visualizing large-scale climate datasets from the IEEE SciVis 2026 Contest. The contest provides real scientific data used in climate and ocean modeling, providing the opportunity to analyze complex environmental phenomena and communicate insights through visualization. This project focused on Task 2 from the SciVis contest tasks, which is described in detail on the [contest website](!https://sciviscontest2026.github.io/tasks/home). The proposed goal of this task was to study atmosphere–ocean interactions during storms and extreme weather events using DYAMOND data, which was implemented through machine learning techniques and external data from the 2020 North Atlantic hurrcane season. A brief description of the methods can be found below.
 
-**Focus:**
-- Hurricanes
-- Cyclones
-- Monsoons
+#### Data Filtering
+This project consisted of a few steps to filter the data for efficiency and usefulness. </br>
+1. <u> Shift data to center the Atlantic </u>
+- The native data from the DYAMOND dataset bisected the Altantic ocean.
+- So, the dataset was reconstructed to center the Atlantic and create a continuous dataframe.
+- The new dataframe also removed salinity data from the land cells, giving them a value of *NA* instead of 31.
 
-**Possible variables include:**
-- Wind
-- Pressure
-- Temperature
-- Sea surface temperature
-- Ocean currents
-- Salinity
+<table>
+  <tr>
+    <th>Before</th>
+    <th>After</th>
+  </tr>
+  <tr>
+    <td><img src="./images/original-data.png" width="300" height="200" /></td>
+    <td><img src="./images/global-data.png" width="300" height = "200" /></td>
+  </tr>
+</table>
 
-# Python Environment Installation on JetStream2
 
-**Requirements:** Access to a Jetstream2 instance via SSH or WebShell.
+2. <u> Apply latitude and longitude labels </u>
+- Apply a sense of scale to the dataset to make it match with the National Hurricane Center data.
+- Since the map was recentered around the Atalantic, the labels were not accurate to the global standard.
 
-### 1. Initial Setup (Skip if you already have an instance for the course)
+<table>
+  <tr>
+    <td><img src="./images/atl_season_2020_sm.png" width="700" height="550" /></td>
+  </tr>
+</table>
 
-If you do not already have a Jetstream2 instance, follow the instructions in the [Jetstream2 Setup Manual](./jetstream2_manual.pdf) to create and connect to one.
+3. <u> Constrict data to match 2020 North Atlantic </u>
+- Narrow the data to the North Atlantic using visual inspection.
+- This is the final dataset used in the project, which is visualized below.
 
-### 2. Connect to your Jetstream2 instance
+<table>
+  <tr>
+    <td><img src="./images/atl-data.png" width="500" height="400" /></td>
+  </tr>
+</table>
 
-### 3. Clone the project repository
+#### Variables Added
+Four engineered features were added to the dataset in order to train the model on more helpful salinity information, rather than just the position and salinity of the ocean cells. The variables were:
+| Category | Variable | Description |
+|------|------|-------------|
+| Statistics        | mean, std, min, max    | The mean, standard deviation, minimum and maximum amount of salinity in the sample.      |
+| Salinity Brackets | low, mid, high         | The percentage of ocean cells that have low, medium, and high percentages of salinity.   |
+| Spatial Gradient  | north-south, east-west | The difference in salinity between the means of each half (north-south, east-west).      | 
+| Anomaly           | anomaly                | The difference between the mean salinity and the global mean.                            | 
 
-### 4. Build the Python environment `Python (NSDF-SciVis)`
-```
-module load miniforge
-./build_jetstream_environment.sh
-```
+#### Machine Learning Integration
+An XGBoosted tree model was used in this project. The final model was trained with 200 trees, a max tree depth of 6, a learning rate of 0.01, a scale positive rate of the ratio of the number of negative over positive labels, and an evaluation metric of area under the curve (AUC).
 
-### 5. Start JupyterLab
-```
-jupyter-ip.sh
-```
+#### Final Results
+The final results of the model are shown below. The model performed relatively well, given the large class imbalance as seen in the Support column.
+The total recall was about equal, meaning that the model was learning to discriminate between the classes effectively. It could accurately classify about 80% of both hurricane and non-hurricane events. The low precision in the Hurricane class, however, suggests that the model overly predicted the occurrence of a hurricane; as a result, it was only correct 53% of the time. </br>
 
-### 6. Open JupyterLab
+| Class | Precision | Recall | F1-Score | Support | 
+|-------------|------|------|------|------|
+| No Hurricane | 0.94 | 0.82 | 0.88 | 3694|
+| Hurricane    | 0.53 | 0.81 | 0.64 | 936 |
 
-Open the URL printed in the terminal in your web browser.
+The feature that predicted the presence of a hurricane most strongly was the east-west salinity gradient. One explanation for this finding could be that since hurricanes typically travel from east to west, the large amount of rainfall in the east half would dilute the salinity of the water, causing the difference between the halves to rise.
+</br>
 
-### 7. Select the correct kernel
+<table>
+  <tr>
+    <td><img src="./images/cm.png" width="400" height="300" /></td>
+    <td><img src="./images/feature-importance.png" width="500" height = "300" /></td>
+  </tr>
+</table>
 
-In JupyterLab, select the kernel named: `Python (NSDF-SciVis)`
+#### Future Work
+Future work should focus on correcting data errors, including the latitudinal and longitudinal scaling and using all the 2020 hurricane data. Additional features, such as an indicator of hurricane season and other DYAMOND variables, should be added to the dataset. Storm classification should also be added. Finally, additional steps should be taken to counteract the class imbalance between the target labels.
 
-### 8. Open the notebook for your selected task
+## Installation
+### Pre-Requisites
+- Access to a Jetstream2 instance via SSH or WebShell
+- Anaconda environment manager
+- Python v3.12.5 or higher
 
-Navigate to the Jupyter notebook corresponding to the task you selected and begin working on your project.
+### Dependencies
+Within the anacoda environment, the following libraries are needed:
+- list libraries here
 
-# Installing New Python Libraries into the Environment
+*Note*: If these packages are not already downloaded into the conda environment, they will be installed in the notebook at runtime. Therefore, explicit installation of these external packages is not required by the user.
 
-### 1. Activate the SciVis environment
+### Installation Instructions
+#### Installing a JetStream Instance
+Description 
 
-From the terminal, run: 
-```
-conda activate nsdf-scivis
-```
+1. Initial Setup (skip if you already have an instance)
+- If you do not already have a Jetstream2 instance, follow the instructions in the [Jetstream2 Setup Manual](./jetstream2_manual.pdf) to create and connect to one.
 
-### 2. Verify the Python path
+2. Connect to your Jetstream2 instance
+- Use the web interface in JetStream to navigate to the instance and launch the web shell.
 
-Confirm that your Python path points to the activated environment:
-```
-which python
-```
+3. Clone the project repository
+    ```
+    git clone https://github.com/CISC879-BigData/assignment10-soilmoisture-acandershock.git
+    ```
+4. Build the Python environment `Python (NSDF-SciVis)`
+    ```
+    module load miniforge
+    ./build_jetstream_environment.sh
+    ```
+5. Start JupyterLab
+    ```
+    jupyter-ip.sh
+    ```
+6. Open JupyterLab
+- Open the URL printed in the terminal in your web browser.
+  
+7. Select the correct kernel
+- In JupyterLab, select the kernel named `Python (NSDF-SciVis)`.
+  
+8. Open the notebook
+- Navigate to the Jupyter notebook titled `hurricane.ipynb` in the `project-code` repository. See further instructions in [Set-Up](##Set-Up) for how to run.
 
-### 3. Install the desired library
+#### Installing New Python Libraries into the Environment
+Description 
 
-Replace `<library_name>` with the name of the library you want to install:
-```
-python -m pip install <library_name>
-```
+1. Activate the SciVis environment
+- From the terminal, run: 
+    ```
+    conda activate nsdf-scivis
+    ```
+2. Verify the Python path
+- Confirm that your Python path points to the activated environment:
+    ```
+    which python
+    ```
+3. Install the desired library
+- Replace `<library_name>` with the name of the library you want to install:
+    ```
+    python -m pip install <library_name>
+    ```
+4. Restart the Jupyter kernel 
+- If you already have a JupyterLab session open, you may need to restart the kernel for the newly installed libraries to become available.
 
-### 4. Restart the Jupyter kernel 
+## Set-Up
+### Running
+#### Running JetStream
 
-If you already have a JupyterLab session open, you may need to restart the kernel for the newly installed libraries to become available.
+#### Executing Notebook
+
+### Examples
+
+## Contact-Information
+
+## Acknowledgements
+
+## References
