@@ -215,7 +215,7 @@ In case you would like to install new libraries into the enviroment that are not
 - Navigate to the Jupyter notebook titled `hurricane.ipynb` in the `project-code` repository. See further instructions in [Executing Notebook](#executing-notebook) for how to run.
 
 ### Executing Notebook
-The notebook has two different ways to run, depending on the data you would like to use. This divergence occurs at Step 3. Please read the following section carefully to determine which path best applies to you when you arrive at that section.
+The notebook has two different ways to run, depending on the data you would like to use. This divergence occurs at Section 3. Please read the following section carefully to determine which path best applies to you when you arrive at that section.
 The sections in the notebook have been categorized into RUN and CHOOSE, meaning:
 - ALL: everyone must run these sections. Your notebook will not compile if you neglect them.
 - CHOOSE: you must decide which section to run; you pick one or the other, but not both.
@@ -237,7 +237,7 @@ Due to the diverging nature of the notebook, we do not suggest using the 'Run Al
   </tr>
 </table>
 
-3. That's it! A description of each section is shown below for your convenience.
+3. That's it! A description of each section is shown below for your convenience. Remember, you will need to run the ALL sections, and choose which section to run in the CHOOSE sections.
 
 #### ALL: Initial Set-Up
 | Order | Section Name | Description |
@@ -283,4 +283,4 @@ https://www.nhc.noaa.gov/data/tcr/index.php?basin=atlseason=2020,
 2020. Accessed: 2026-05-12. </br>
 <a id="5">[5]</a>
 T. Chen and C. Guestrin, “Xgboost: A scalable tree boosting system,”
-Proceedings of the ACM SIGKDD Intern
+Proceedings of the ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, 2016.
