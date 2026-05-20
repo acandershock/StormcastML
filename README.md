@@ -118,7 +118,10 @@ The feature that predicted the presence of a hurricane most strongly was the eas
 </table>
 
 ### Future Work
-Future work should focus on correcting data errors, including the latitudinal and longitudinal scaling and using all the 2020 hurricane data. Additional features, such as an indicator of hurricane season and other DYAMOND variables, should be added to the dataset. Storm classification should also be added. Finally, additional steps should be taken to counteract the class imbalance between the target labels.
+Future work should focus on correcting data errors, including the latitudinal and longitudinal scaling and using all the 2020 hurricane data. Additional features, such as an indicator of hurricane season and other DYAMOND variables, should be added to the dataset. Storm classification should also be added. Finally, additional steps should be taken to counteract the class imbalance between the target labels. </br>
+
+#### Living Document Disclaimer
+*Note:* This is a living document, meaning these results and figures may become out of date as the notebook is updated and refined. The final results, including figures and analysis, will be updated when work is complete on this project; for now, we invite you to use them as a baseline of comparison.
 
 ## Installation
 ### Pre-Requisites
