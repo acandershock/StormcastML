@@ -57,8 +57,8 @@ This project consisted of a few steps to filter the data for efficiency and usef
 
 
 2. <u> Apply latitude and longitude labels </u>
-- Apply a sense of scale to the dataset to make it match with the National Hurricane Center data.
-- Since the map was recentered around the Atalantic, the labels were not accurate to the global standard.
+- Apply a sense of scale (lat, lon) to the dataset. This is needed to match our dataset with the National Hurricane Center data [[4]](#4) (visualized below), then crop to the North Atlantic.
+- However, since the map was recentered around the Atalantic, the labels were not accurate to the global latitude and longitude labels.
 
 <table>
   <tr>
@@ -279,7 +279,7 @@ B. Stevens et al., “Dyamond: the dynamics of the atmospheric general
 circulation modeled on non-hydrostatic domains,” vol. 6, 2019. </br>
 <a id="4">[4]</a>
 National Hurricane Center, “2020 atlantic hurricane season.”
-https://www.nhc.noaa.gov/data/tcr/index.php?basin=atlseason=2020,
+https://www.nhc.noaa.gov/data/tcr/index.php?season=2020&basin=atl,
 2020. Accessed: 2026-05-12. </br>
 <a id="5">[5]</a>
 T. Chen and C. Guestrin, “Xgboost: A scalable tree boosting system,”
